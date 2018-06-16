@@ -3099,16 +3099,7 @@ html.no-csstransitions .home-content__main {
     width: 35%;
 }
 
-.contact-secondary::before {
-    content: "";
-    display: block;
-    width: 35%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    background-color: #121212;
-}
+
 
 .contact-secondary .contact-info {
     position: relative;
