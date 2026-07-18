@@ -65,14 +65,17 @@ function Constellation({ onHover }: { onHover: (l: TechLogo | null) => void }) {
 
 export default function TechScene({
   onHover,
+  active = true,
 }: {
   onHover: (l: TechLogo | null) => void;
+  active?: boolean;
 }) {
   return (
     <Canvas
+      frameloop={active ? "always" : "never"}
       camera={{ position: [0, 0, 10], fov: 42 }}
-      dpr={[1, 2]}
-      gl={{ antialias: true, alpha: true }}
+      dpr={[1, 1.5]}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
     >
       <ambientLight intensity={0.5} />
       <directionalLight position={[5, 6, 6]} intensity={1.4} />
@@ -80,8 +83,8 @@ export default function TechScene({
       <pointLight position={[8, -4, 2]} intensity={70} color="#38bdf8" />
       <pointLight position={[0, 6, -6]} intensity={60} color="#a78bfa" />
 
-      <Stars radius={40} depth={30} count={800} factor={3} fade speed={1} />
-      <Sparkles count={40} scale={12} size={2.5} speed={0.35} opacity={0.5} color="#4ade80" />
+      <Stars radius={40} depth={30} count={350} factor={3} fade speed={1} />
+      <Sparkles count={24} scale={12} size={2.5} speed={0.35} opacity={0.5} color="#4ade80" />
 
       <Constellation onHover={onHover} />
 

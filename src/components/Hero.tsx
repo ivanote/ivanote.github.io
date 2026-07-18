@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { ArrowDown, Mail } from "lucide-react";
 import { HERO_TAGLINE } from "@/lib/content";
@@ -74,8 +74,23 @@ export default function Hero() {
     ? -1
     : LINES.findIndex((l, i) => rendered[i].length < l.text.length);
 
+  // Pausa el render 3D cuando el hero sale de pantalla (ahorra GPU al hacer scroll).
+  const sectionRef = useRef<HTMLElement>(null);
+  const [heroActive, setHeroActive] = useState(true);
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => setHeroActive(e.isIntersecting),
+      { threshold: 0 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="top"
       className="relative flex min-h-svh items-center overflow-hidden pt-24"
     >
@@ -91,7 +106,7 @@ export default function Hero() {
       />
       {/* 3D atom */}
       <div className="pointer-events-none absolute inset-y-0 right-0 -z-20 w-full opacity-50 md:w-[58%] md:opacity-90">
-        <HeroScene />
+        <HeroScene active={heroActive} />
       </div>
       {/* legibility scrim over the 3D layer */}
       <div

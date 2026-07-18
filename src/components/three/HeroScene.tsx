@@ -28,12 +28,13 @@ function ParallaxRig({ children }: { children: React.ReactNode }) {
   return <group ref={ref}>{children}</group>;
 }
 
-export default function HeroScene() {
+export default function HeroScene({ active = true }: { active?: boolean }) {
   return (
     <Canvas
+      frameloop={active ? "always" : "never"}
       camera={{ position: [0, 0, 7], fov: 45 }}
-      dpr={[1, 2]}
-      gl={{ antialias: true, alpha: true }}
+      dpr={[1, 1.5]}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
     >
       <fog attach="fog" args={["#0a0f1e", 8, 16]} />
       <ambientLight intensity={0.4} />
@@ -46,7 +47,7 @@ export default function HeroScene() {
       </ParallaxRig>
 
       <Sparkles
-        count={80}
+        count={45}
         scale={12}
         size={2}
         speed={0.3}
