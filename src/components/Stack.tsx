@@ -65,17 +65,17 @@ export default function Stack() {
                     onBlur={() => setHovered(null)}
                     aria-label={logo.label}
                     style={{ "--brand": logo.color } as CSSProperties}
-                    className="group flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-2xl border border-border-bright bg-surface/60 transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-1.5 hover:bg-surface-2/60 hover:[border-color:var(--brand)] hover:[box-shadow:0_14px_44px_-14px_var(--brand)] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    className="group flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-2xl border bg-surface-2/60 transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] [border-color:var(--brand)] [box-shadow:0_0_22px_-6px_var(--brand)] md:border-border-bright md:bg-surface/60 md:[box-shadow:none] md:hover:-translate-y-1.5 md:hover:bg-surface-2/60 md:hover:[border-color:var(--brand)] md:hover:[box-shadow:0_14px_44px_-14px_var(--brand)] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   >
                     <svg
                       viewBox={`0 0 ${LOGO_VIEWBOX} ${LOGO_VIEWBOX}`}
-                      className="h-11 w-11 text-fg-muted transition-all duration-300 group-hover:scale-110 group-hover:[color:var(--brand)] sm:h-12 sm:w-12"
+                      className="h-11 w-11 [color:var(--brand)] transition-all duration-300 md:text-fg-muted md:group-hover:scale-110 md:group-hover:[color:var(--brand)] sm:h-12 sm:w-12"
                       fill="currentColor"
                       aria-hidden
                     >
                       <path d={logo.path} />
                     </svg>
-                    <span className="font-mono text-[11px] text-fg-dim transition-colors group-hover:text-fg">
+                    <span className="font-mono text-[11px] text-fg transition-colors md:text-fg-dim md:group-hover:text-fg">
                       {logo.label}
                     </span>
                   </button>

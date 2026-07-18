@@ -104,15 +104,17 @@ export default function Waterpolo() {
   const Photos = WATERPOLO.photos.map((p, i) => (
     <figure
       key={p.src}
-      className="group relative h-[64svh] shrink-0 overflow-hidden rounded-2xl border border-border-bright/50 shadow-[var(--shadow-card)] sm:h-[76svh]"
+      className="group relative h-[56svh] w-[80vw] shrink-0 overflow-hidden rounded-2xl border border-border-bright/50 shadow-[var(--shadow-card)] sm:h-[76svh] sm:w-auto"
       style={{ aspectRatio: `${p.w} / ${p.h}`, maxHeight: `${Math.round(p.h * 1.4)}px` }}
     >
       <Image
         src={p.src}
         alt={`Iván Gallego Vela · waterpolo — ${p.tag}`}
         fill
-        sizes="(max-width: 640px) 85vw, 48vw"
-        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        sizes="(max-width: 640px) 80vw, 48vw"
+        className={`object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${
+          "pos" in p && p.pos === "right" ? "object-right" : "object-center"
+        }`}
         priority={i < 2}
       />
       <div

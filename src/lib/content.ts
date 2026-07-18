@@ -146,7 +146,7 @@ export const WATERPOLO = {
     { src: "/waterpolo/w6.jpg", w: 800, h: 566, tag: "Visión de juego" },
     { src: "/waterpolo/w4.jpg", w: 800, h: 509, tag: "Sacrificio" },
     { src: "/waterpolo/w7.jpg", w: 340, h: 411, tag: "Iniciativa" },
-    { src: "/waterpolo/w1.jpg", w: 610, h: 405, tag: "Presión" },
+    { src: "/waterpolo/w1.jpg", w: 610, h: 405, tag: "Presión", pos: "right" },
     { src: "/waterpolo/w5.jpg", w: 610, h: 537, tag: "Equipo" },
   ],
 } as const;
