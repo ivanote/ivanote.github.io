@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Iván Gallego — Portfolio / CV
 
-## Getting Started
+Portfolio personal de **Iván Gallego Vela**, Full Stack Developer (Laravel · React / Next.js · TypeScript).
 
-First, run the development server:
+Estética terminal/dev con modelos **3D reales** de las tecnologías del stack (React, Laravel, Next.js, TypeScript, Docker…) renderizados en tiempo real con **React Three Fiber**.
+
+## Stack del proyecto
+
+- **Next.js 16** (App Router) + **React 19** + **TypeScript**
+- **Tailwind CSS v4** (design tokens en `globals.css`)
+- **three.js** / **@react-three/fiber** / **@react-three/drei** — átomo de React y logos 3D extruidos desde SVG
+- **lucide-react** — iconos SVG
+- Fuentes: **JetBrains Mono** + **Inter** (`next/font`, self-hosted)
+
+## Desarrollo local
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # build de producción
+npm start        # servir el build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Estructura
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+  app/
+    layout.tsx        # fuentes + metadata (SEO, Open Graph)
+    page.tsx          # ensambla las secciones + JSON-LD
+    globals.css       # sistema de diseño (tokens, animaciones, utilidades)
+    icon.svg          # favicon de marca
+  components/
+    Nav · Hero · Stats · About · Experience · Stack · Education · Contact · Footer
+    Reveal.tsx        # scroll-reveal (IntersectionObserver)
+    three/
+      HeroScene.tsx   # canvas del hero + parallax de ratón
+      ReactAtom.tsx   # átomo de React procedural
+      TechScene.tsx   # anillo de logos 3D
+      ExtrudedLogo.tsx# extruye cualquier path SVG a un modelo 3D
+  lib/
+    content.ts        # todo el contenido del CV (edítalo aquí)
+    logos.ts          # paths de marca (auto-generado desde public/logos)
+public/
+  CV-Ivan-Gallego.pdf # CV descargable
+  logos/*.svg         # logos de marca (simple-icons)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Editar el contenido
 
-## Learn More
+Todo el texto del CV vive en **`src/lib/content.ts`** (perfil, experiencia, stack, formación, contacto). No hace falta tocar los componentes.
 
-To learn more about Next.js, take a look at the following resources:
+Para cambiar el CV descargable, reemplaza `public/CV-Ivan-Gallego.pdf`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Desplegar en Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Opción A — Importar desde GitHub (recomendada):**
 
-## Deploy on Vercel
+1. Sube el proyecto a un repo de GitHub (ver más abajo).
+2. Entra en [vercel.com/new](https://vercel.com/new) e importa el repo.
+3. Vercel detecta Next.js automáticamente → **Deploy**. Cero configuración.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Opción B — Vercel CLI:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm i -g vercel
+vercel          # primera vez: login + configurar proyecto
+vercel --prod   # desplegar a producción
+```
+
+### Subir a GitHub
+
+```bash
+git add -A
+git commit -m "Portfolio 3D en Next.js"
+gh repo create ivanote-portfolio --public --source=. --push
+# o crea el repo en github.com y:
+# git remote add origin https://github.com/<usuario>/ivanote-portfolio.git
+# git push -u origin main
+```
+
+## Accesibilidad y rendimiento
+
+- Respeta `prefers-reduced-motion` (desactiva animaciones y typewriter).
+- Escenas 3D cargadas con `dynamic(..., { ssr: false })` — no bloquean el render inicial.
+- Contraste AA, foco visible, navegación por teclado, metadata + JSON-LD (schema.org/Person).
