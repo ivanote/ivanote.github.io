@@ -109,7 +109,7 @@ export default function Waterpolo() {
     >
       <Image
         src={p.src}
-        alt={`Iván Gallego Vela · waterpolo — ${p.caption}`}
+        alt={`Iván Gallego Vela · waterpolo — ${p.tag}`}
         fill
         sizes="(max-width: 640px) 85vw, 48vw"
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -120,16 +120,13 @@ export default function Waterpolo() {
         aria-hidden
         style={{
           background:
-            "linear-gradient(180deg, transparent 45%, rgba(10,15,30,0.15) 65%, rgba(10,15,30,0.9) 100%)",
+            "linear-gradient(180deg, transparent 55%, rgba(10,15,30,0.15) 72%, rgba(10,15,30,0.85) 100%)",
         }}
       />
       <figcaption className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-        <span className="inline-flex rounded-full border border-cyan/40 bg-cyan/10 px-2.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-cyan">
+        <span className="inline-flex rounded-full border border-cyan/40 bg-cyan/10 px-2.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-cyan backdrop-blur">
           {p.tag}
         </span>
-        <p className="mt-2 text-sm font-medium text-fg sm:text-base">
-          {p.caption}
-        </p>
       </figcaption>
       <span className="absolute right-3 top-3 font-mono text-[11px] text-fg/70">
         {String(i + 1).padStart(2, "0")}/{String(WATERPOLO.photos.length).padStart(2, "0")}

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { ArrowDown, Mail } from "lucide-react";
-import { PROFILE, HERO_TAGLINE } from "@/lib/content";
+import { HERO_TAGLINE } from "@/lib/content";
 
 const HeroScene = dynamic(() => import("./three/HeroScene"), { ssr: false });
 
@@ -168,11 +168,6 @@ export default function Hero() {
               Ver experiencia
               <ArrowDown size={16} aria-hidden />
             </a>
-          </div>
-
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs text-fg-dim">
-            <span>{PROFILE.yearsExperience}+ años de experiencia</span>
-            <span className="text-fg-dim">Laravel · React / Next.js · TypeScript</span>
           </div>
         </div>
       </div>

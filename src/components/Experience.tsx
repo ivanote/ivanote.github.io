@@ -22,30 +22,34 @@ export default function Experience() {
           />
 
           {EXPERIENCE.map((job, i) => (
-            <li key={job.company} className="relative pl-8 sm:pl-12">
-              <Reveal delay={i * 90} className="pb-10 last:pb-0">
-                {/* node */}
-                <span
-                  className={`absolute left-0 top-1.5 flex h-4 w-4 items-center justify-center rounded-full border sm:h-[19px] sm:w-[19px] ${
-                    job.current
-                      ? "border-accent bg-accent/20"
-                      : "border-border-bright bg-surface"
-                  }`}
-                  aria-hidden
-                >
-                  {job.current && (
-                    <>
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/40" />
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                    </>
-                  )}
-                  {!job.current && (
-                    <span className="h-1 w-1 rounded-full bg-fg-dim" />
-                  )}
-                </span>
+            <li
+              key={job.company}
+              className="relative pb-16 pl-10 last:pb-0 sm:pb-20 sm:pl-14"
+            >
+              {/* node — fuera del Reveal para anclarse al <li>, no al transform */}
+              <span
+                className={`absolute left-0 top-1.5 flex h-4 w-4 items-center justify-center rounded-full border sm:h-[19px] sm:w-[19px] ${
+                  job.current
+                    ? "border-accent bg-accent/20"
+                    : "border-border-bright bg-surface"
+                }`}
+                aria-hidden
+              >
+                {job.current ? (
+                  <>
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/40" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  </>
+                ) : (
+                  <span className="h-1 w-1 rounded-full bg-fg-dim" />
+                )}
+              </span>
 
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <span className="font-mono text-[11px] text-fg-dim">
+              <Reveal delay={i * 90}>
+                {/* cabecera del bloque: fecha como tag de commit, pegada a la empresa */}
+                <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
+                  <span className="inline-flex items-center gap-1.5 rounded-md border border-border-bright bg-surface-2/50 px-2.5 py-1 font-mono text-[11px] text-fg-muted">
+                    <span className="text-accent">◆</span>
                     {job.period}
                   </span>
                   {job.current && (
@@ -55,14 +59,14 @@ export default function Experience() {
                   )}
                 </div>
 
-                <h3 className="mt-1.5 text-xl font-bold leading-tight text-fg sm:text-2xl">
+                <h3 className="mt-3 text-xl font-bold leading-tight text-fg sm:text-2xl">
                   {job.company}
                 </h3>
                 <p className="mt-0.5 font-mono text-sm text-accent-bright">
                   {job.role}
                 </p>
 
-                <ul className="mt-3 space-y-1.5">
+                <ul className="mt-4 space-y-1.5">
                   {job.points.map((pt, j) => (
                     <li
                       key={j}

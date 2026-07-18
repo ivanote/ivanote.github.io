@@ -9,8 +9,8 @@ export const PROFILE = {
   email: "ivangallegovela@gmail.com",
   phone: "637 45 44 98",
   phoneHref: "+34637454498",
-  linkedin: "https://linkedin.com/in/ivan-gallego-vela",
-  linkedinLabel: "linkedin.com/in/ivan-gallego-vela",
+  linkedin: "https://www.linkedin.com/in/ivan-gallego-vela-73824b118",
+  linkedinLabel: "linkedin.com/in/ivan-gallego-vela-73824b118",
   github: "https://github.com/ivanote",
   yearsExperience: 6,
 };
@@ -136,19 +136,18 @@ export const EDUCATION: Education[] = [
 ];
 
 export const WATERPOLO = {
-  title: "Antes del código, el agua",
+  title: "Antes del código fue el deporte.",
   intro:
-    "Durante años competí al máximo nivel como waterpolista de la Selección Española. El deporte de élite me enseñó lo que hoy define mi forma de programar: disciplina diaria, cabeza fría bajo presión y la certeza de que nada bueno se construye en solitario.",
+    "Durante años competí al máximo nivel como waterpolista de la Selección Española y logré mi meta: llegar a unos Juegos Olímpicos. El deporte de élite me enseñó lo que hoy define mi forma de programar: disciplina diaria, cabeza fría bajo presión y la certeza de que nada bueno se construye en solitario.",
   outro:
     "Colgué el gorro, pero no la mentalidad. La misma constancia que me llevó a competir con los mejores es la que pongo hoy en cada línea de código.",
   photos: [
-    { src: "/waterpolo/w2.jpg", w: 545, h: 800, tag: "Selección Española", caption: "Preparando el lanzamiento" },
-    { src: "/waterpolo/w6.jpg", w: 800, h: 566, tag: "Ataque", caption: "Buscando el hueco en la defensa" },
-    { src: "/waterpolo/w4.jpg", w: 800, h: 509, tag: "En el agua", caption: "Presión y posición, cada segundo cuenta" },
-    { src: "/waterpolo/w7.jpg", w: 340, h: 411, tag: "Contraataque", caption: "Decidir en milésimas" },
-    { src: "/waterpolo/w1.jpg", w: 610, h: 405, tag: "Competición", caption: "Partido internacional" },
-    { src: "/waterpolo/w5.jpg", w: 610, h: 537, tag: "Equipo", caption: "Cada gol lo firma el equipo entero" },
-    { src: "/waterpolo/w3.jpg", w: 302, h: 367, tag: "Foco", caption: "Concentración antes del pitido" },
+    { src: "/waterpolo/w2.jpg", w: 545, h: 800, tag: "Disciplina" },
+    { src: "/waterpolo/w6.jpg", w: 800, h: 566, tag: "Visión de juego" },
+    { src: "/waterpolo/w4.jpg", w: 800, h: 509, tag: "Sacrificio" },
+    { src: "/waterpolo/w7.jpg", w: 340, h: 411, tag: "Iniciativa" },
+    { src: "/waterpolo/w1.jpg", w: 610, h: 405, tag: "Presión" },
+    { src: "/waterpolo/w5.jpg", w: 610, h: 537, tag: "Equipo" },
   ],
 } as const;
 

@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Download, ArrowUpRight } from "lucide-react";
+import { Mail, MapPin, Download, ArrowUpRight } from "lucide-react";
 import Reveal from "./Reveal";
 import { PROFILE } from "@/lib/content";
 
@@ -22,12 +22,6 @@ const CHANNELS = [
     label: "email",
     value: PROFILE.email,
     href: `mailto:${PROFILE.email}`,
-  },
-  {
-    icon: Phone,
-    label: "teléfono",
-    value: PROFILE.phone,
-    href: `tel:${PROFILE.phoneHref}`,
   },
   {
     icon: Linkedin,
