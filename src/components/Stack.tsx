@@ -1,37 +1,31 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
-import { MousePointer2 } from "lucide-react";
+import { useState, type CSSProperties } from "react";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import { STACK } from "@/lib/content";
-import type { TechLogo } from "@/lib/logos";
+import { TECH_LOGOS, LOGO_VIEWBOX, type TechLogo } from "@/lib/logos";
 
-const TechScene = dynamic(() => import("./three/TechScene"), { ssr: false });
+// Logos oficiales destacados (paths de simple-icons en logos.ts).
+const FEATURED = [
+  "laravel",
+  "react",
+  "nextdotjs",
+  "typescript",
+  "php",
+  "tailwindcss",
+  "vuedotjs",
+  "mysql",
+  "docker",
+  "git",
+];
+
+const LOGOS = FEATURED.map((k) => TECH_LOGOS.find((l) => l.key === k)!).filter(
+  Boolean
+);
 
 export default function Stack() {
   const [hovered, setHovered] = useState<TechLogo | null>(null);
-  const [show3D, setShow3D] = useState(false);
-  const [active3D, setActive3D] = useState(false);
-  const canvasRef = useRef<HTMLDivElement>(null);
-
-  // Monta el canvas 3D (y descarga su JS pesado) solo cuando se acerca al
-  // viewport, y pausa su render cuando sale de pantalla: mejora la carga
-  // inicial y evita gastar GPU en segundo plano al hacer scroll.
-  useEffect(() => {
-    const el = canvasRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        setActive3D(e.isIntersecting);
-        if (e.isIntersecting) setShow3D(true);
-      },
-      { rootMargin: "300px 0px" }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
 
   return (
     <section
@@ -44,39 +38,60 @@ export default function Stack() {
         <SectionHeading
           index="03"
           title="Stack técnico"
-          subtitle="Modelos 3D reales de las tecnologías con las que trabajo cada día. Arrastra para girarlas y pasa el ratón por encima."
+          subtitle="Las tecnologías con las que trabajo cada día. Pasa el ratón por encima."
         />
 
-        {/* 3D interactive canvas */}
+        {/* Rejilla de logos oficiales */}
         <Reveal>
-          <div
-            ref={canvasRef}
-            className="relative mb-14 h-[380px] w-full cursor-grab overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-surface/40 to-bg-elev/20 active:cursor-grabbing sm:h-[480px]"
-          >
-            {show3D ? (
-              <TechScene onHover={setHovered} active={active3D} />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center font-mono text-xs text-fg-dim">
-                <span className="text-accent">$</span>
-                <span className="ml-2">cargando escena 3D…</span>
-              </div>
-            )}
+          <div className="relative mb-14 overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-surface/40 to-bg-elev/20 p-6 sm:p-10">
+            {/* glow ambiental */}
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-40 -z-0"
+              aria-hidden
+              style={{
+                background:
+                  "radial-gradient(60% 100% at 50% 0%, rgba(34,197,94,0.10), transparent 70%)",
+              }}
+            />
 
-            {/* hint */}
-            <div className="pointer-events-none absolute right-4 top-4 hidden items-center gap-1.5 rounded-full border border-border-bright/60 bg-bg/60 px-3 py-1.5 font-mono text-[11px] text-fg-muted backdrop-blur sm:flex">
-              <MousePointer2 size={12} aria-hidden />
-              arrastra para rotar
+            <div className="relative grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-5">
+              {LOGOS.map((logo, i) => (
+                <Reveal key={logo.key} delay={i * 45}>
+                  <button
+                    type="button"
+                    onMouseEnter={() => setHovered(logo)}
+                    onMouseLeave={() => setHovered(null)}
+                    onFocus={() => setHovered(logo)}
+                    onBlur={() => setHovered(null)}
+                    aria-label={logo.label}
+                    style={{ "--brand": logo.color } as CSSProperties}
+                    className="group flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-2xl border border-border-bright bg-surface/60 transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-1.5 hover:bg-surface-2/60 hover:[border-color:var(--brand)] hover:[box-shadow:0_14px_44px_-14px_var(--brand)] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  >
+                    <svg
+                      viewBox={`0 0 ${LOGO_VIEWBOX} ${LOGO_VIEWBOX}`}
+                      className="h-11 w-11 text-fg-muted transition-all duration-300 group-hover:scale-110 group-hover:[color:var(--brand)] sm:h-12 sm:w-12"
+                      fill="currentColor"
+                      aria-hidden
+                    >
+                      <path d={logo.path} />
+                    </svg>
+                    <span className="font-mono text-[11px] text-fg-dim transition-colors group-hover:text-fg">
+                      {logo.label}
+                    </span>
+                  </button>
+                </Reveal>
+              ))}
             </div>
 
-            {/* live caption */}
-            <div className="pointer-events-none absolute bottom-3 left-4 font-mono text-[11px] text-fg-dim">
+            {/* caption terminal */}
+            <div className="relative mt-6 font-mono text-[11px] text-fg-dim">
               <span className="text-accent">$</span>{" "}
               {hovered ? (
                 <span className="text-accent-bright">
                   focus --tech={hovered.label}
                 </span>
               ) : (
-                <span>render --engine=three.js --live</span>
+                <span>stack --logos=oficiales --count={LOGOS.length}</span>
               )}
             </div>
           </div>
